@@ -12,16 +12,6 @@ import useFetch from "./useFetch";
 
 function App() {
   const [user, setUser] = useState(null);
-//   const [allUsers, setAllUsers] = useState([]);
-
-  // useEffect(() => {
-  //   fetch("/users")
-  //     .then((response) => response.json())
-  //     .then((allUsers) => {
-  //       setAllUsers(allUsers);
-  //     });
-  // }, []);
-// console.log(allUsers)
   useEffect(() => {
     fetch("/me").then((r) => {
       if (r.ok) {
@@ -31,8 +21,6 @@ function App() {
   }, []);
 
   if (!user) return <Login onLogin={setUser} />;
-
-  // const {error, isLoading, data} = useFetch('http://localhost:3000/')
   return (
     // <BrowserRouter>
       

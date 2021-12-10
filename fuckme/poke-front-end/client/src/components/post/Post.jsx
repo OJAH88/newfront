@@ -24,7 +24,7 @@ export default function Post({ post, handleDelete }) {
         </div>
         <div className="postBottom">
           <div className="postBottomLeft">
-            <button onClick={() => {
+            <button  className="deleteButton" onClick={() => {
             handleDelete(post);
           }}>Delete</button>
           </div>

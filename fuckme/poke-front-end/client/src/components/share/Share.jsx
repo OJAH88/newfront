@@ -3,7 +3,7 @@ import { PermMedia, Label, EmojiEmotions } from "@material-ui/icons";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Share = () => {
+const Share = ({ addPost }) => {
   const [content, setContent] = useState("");
   const [imgurl, setImgurl] = useState("");
   const [errors, setErrors] = useState([]);
@@ -13,7 +13,6 @@ const Share = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("fuck");
     setErrors([]);
     setIsLoading(true);
 
@@ -21,12 +20,11 @@ const Share = () => {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newPost),
-    }).then(() => {
-      console.log("New Post Added");
-      console.log(newPost);
-      setIsLoading(false);
-      navigate("/");
-    });
+    })
+      .then((response) => response.json())
+      .then(addPost);
+    setIsLoading(false);
+    navigate("/");
   };
 
   return (
@@ -57,14 +55,6 @@ const Share = () => {
                   onChange={(e) => setImgurl(e.target.value)}
                 />
               </div>
-              {/* <div className="shareOption">
-                            <Label htmlColor="lightgreen" className="shareIcon"/>
-                            <span className="shareOptionText">Tag</span>
-                        </div>
-                        <div className="shareOption">
-                            <EmojiEmotions htmlColor="goldenrod" className="shareIcon"/>
-                            <span className="shareOptionText">Feeling</span>
-                        </div> */}
             </div>
             <button
               type="submit"

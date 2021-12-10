@@ -6,6 +6,12 @@ import Post from "../post/Post";
 ///Fetch posts
 export default function Feed() {
   const [allPosts, setAllPosts] = useState([]);
+
+  const addPost = (newPost) => {
+    setAllPosts([...allPosts, newPost]);
+  };
+
+
   useEffect(() => {
     fetch("/posts")
       .then((response) => response.json())
@@ -24,30 +30,12 @@ export default function Feed() {
       setAllPosts(updatedPosts);
     });
   };
-  // const handleSubmit = (e) => {
-  //     e.preventDefault();
-  //     console.log("fuck");
-  //     setErrors([]);
-  //     setIsLoading(true);
-
-  //     fetch("/posts", {
-  //       method: "POST",
-  //       headers: { "Content-Type": "application/json" },
-  //       body: JSON.stringify(newPost),
-  //     }).then(() => {
-  //       console.log("New Post Added");
-  //       console.log(newPost);
-  //       setIsLoading(false);
-  //       navigate("/");
-  //     });
-  //   };
-
   return (
     <div className="feed">
       <div className="feedWrapper">
-        <Share />
+        <Share addPost={addPost}/>
         {allPosts.slice(0).reverse().map((post) => (
-          <Post key={post.id}  post={post} handleDelete={handleDelete} allPosts={allPosts} />
+          <Post key={post.id}  post={post} handleDelete={handleDelete} allPosts={allPosts}  addPost={addPost} />
           
         ))}
       </div>

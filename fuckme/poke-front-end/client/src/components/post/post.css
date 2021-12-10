@@ -78,3 +78,14 @@
       border-bottom: 1px dashed gray;
       font-size: 15px;
   }
+
+  .deleteButton {
+    border: none;
+    padding: 7px;
+    border-radius: 5px;
+    font-weight: bold;
+    background-color: blue;
+    margin-right: 20px;
+    cursor: pointer;
+    color: white;
+}
